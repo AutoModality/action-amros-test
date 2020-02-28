@@ -1,0 +1,21 @@
+# see package.yml for usage 
+name: 'Standard Tests against the given version'
+description: 'Test visbox on AMROS container'
+inputs:
+  package-file-path:  
+    description: 'The host past generated artifact to be installed.'
+    required: true
+  launch-file-path:  
+    description: 'Aboslute or relative path, in the AMROS container, to the launch file to be tested.'
+    required: true
+  release-repo-entitlement: 
+    description: 'Access to the Cloudsmith release repository for dependency download.'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args: # see entrypoint.sh for the recipient of these - order matters
+    - ${{ inputs.release-repo-entitlement }}
+    - ${{ inputs.launch-file-path }}
+    - ${{ inputs.ackage-file-path }}
+    
