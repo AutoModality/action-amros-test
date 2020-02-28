@@ -5,12 +5,6 @@ set -e # fail on error
 launch_file_path=$1
 package_file_path=$2
 
-if [[ -z $release_repo_entitlement ]];then
-    echo cloudsmith release repo entitlement is required
-    exit 1
-fi
-
-echo $release_repo_entitlement | docker login --password-stdin --username cloudsmith-read@automodality.com  docker.cloudsmith.io
 
 if [[ -z $launch_file_path ]];then
     echo provide the path, on the container, to the launch file you wish to run
@@ -22,6 +16,8 @@ if [[ -n $package_file_path ]]; then
 else
     echo WARNING: no package is being installed to test
 fi
+
+source /opt/ros/kinetic/setup.bash
 
 roslaunch $launch_file_path &
 
