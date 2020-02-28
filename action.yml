@@ -1,6 +1,6 @@
 # see package.yml for usage 
-name: 'Standard Tests against the given version'
-description: 'Test visbox on AMROS container'
+name: 'AMROS Tests'
+description: 'Runs launch files installing a specific version of a binary.'
 inputs:
   package-file-path:  
     description: 'The host past generated artifact to be installed.'
@@ -13,5 +13,5 @@ runs:
   image: 'Dockerfile'
   args: # see entrypoint.sh for the recipient of these - order matters
     - ${{ inputs.launch-file-path }}
-    - ${{ inputs.package-file-path }}
+    - ${{ inputs.package-file }}
     
